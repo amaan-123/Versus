@@ -10,15 +10,13 @@ Reference types include arrays, strings, and classes.
 
 There were also primitive & reference data types in javascript. Compare & contrast (in an easily understandable format) the important data types for the two languages & their under the hood implementation - only the kind of information useful for real-world full-stack applications.
 
-## Answer 1
-
-### C# vs JavaScript: Key Data Types
+## Answer 1 - C# vs JavaScript: Key Data Types
 
 Entry-level full-stack developers often work with C# on the backend and JavaScript on the frontend. A clear understanding of how each language handles data types is crucial. Both languages have *value types* and *reference types*, but they categorize types and manage memory differently. In C#, types are statically divided into value types (like `int`, `struct`) and reference types (like classes). In JavaScript, *primitives* (numbers, strings, booleans, etc.) behave like value types (immutable), while *objects* (including arrays and functions) are mutable reference types. Assignment of a value type copies the data, whereas assignment of a reference type copies a pointer to the data. In practical terms, modifying one value-type variable doesn’t affect another copy, but changing an object property via one reference affects all references to that object.
 
 Below we compare common data types with these points in mind: whether each is value or reference type, how it’s stored (stack vs heap), how assignment/mutation work, and how they appear in web scenarios (form values, JSON data, component state, etc.). Afterward, a summary table highlights similarities and differences. Finally, we note advanced topics (like boxing, interning, memory optimizations) that are beyond entry-level focus.
 
-## Value vs. Reference – Fundamental Concept
+### Value vs. Reference – Fundamental Concept
 
 * **C#:** Types fall into *value types* and *reference types*. A value-type variable **contains** its data directly (often on the stack). A reference-type variable **holds a pointer** to data on the heap. On assignment or method call, value-type data is **copied**; reference-type assignments copy the pointer. For example, with value types changing one copy doesn’t affect the other. With reference types, two variables can refer to the same object, so mutating the object via one variable is seen by the other.
 
@@ -26,7 +24,7 @@ Below we compare common data types with these points in mind: whether each is va
 
 These rules influence how data flows in web applications. For example, HTML form inputs and API calls often use strings, so understanding string handling is key. State management (in React, for instance) often relies on immutability of primitives and needs caution with mutable objects/arrays. Below we detail each common type.
 
-## Strings
+### Strings
 
 * **Definition:** A sequence of characters for text data (e.g. names, messages).
 * **C#:** The `string` type (alias for `System.String`) is a *reference* type stored on the heap. However, strings are **immutable**: any “modification” (like concatenation) creates a new string object. For example, doing `string a = "hi"; string b = a; a += " there";` results in `b` still holding `"hi"` because `a+=` made a new string for `a`. Internally, C# may **intern** identical strings (store one copy), but that’s an advanced detail. Assignment copies the reference, but because you cannot change a string’s content, strings behave *like* value types in practice.
@@ -34,7 +32,7 @@ These rules influence how data flows in web applications. For example, HTML form
 
 **Usage (full-stack context):** Web forms return text (strings) for inputs, and APIs often send/receive JSON where fields are text. In React or ASP.NET, strings are typically held in state variables and updated immutably (replacing the string with a new one). Both C# and JS string concatenation create new values, so frequent string building (like in loops) should use efficient methods (`StringBuilder` in C#, `array.join` or template literals in JS) at scale.
 
-## Numbers (Numeric Types)
+### Numbers (Numeric Types)
 
 * **Definition:** Numeric values (integers, floats) for counting, calculation, etc.
 
@@ -44,14 +42,14 @@ These rules influence how data flows in web applications. For example, HTML form
 
 * **Usage:** Numeric fields appear in forms (age, price, quantity). In C# APIs, JSON numbers map to numeric types in models. In React state, numbers are stored like other primitives. Remember that C# integers vs floats behave differently (e.g. division by two: `5/2` gives 2 in `int` type, but 2.5 in `double`), while JS `5/2` always gives 2.5. Large-scale numeric data (financial, scientific) may need `decimal` in C# or libraries in JS.
 
-## Booleans
+### Booleans
 
 * **Definition:** Truth values `true` or `false`.
 * **C#:** `bool` is a value type (usually 1 byte). Stored by value and copied on assignment.
 * **JavaScript:** `boolean` is a primitive (with values `true` or `false`). Also passed by value.
 * **Usage:** Used in conditions, form checkboxes, JSON flags. Both languages treat booleans as immutable values. A JS quirk: many values (like empty string `""`, number `0`, `null`, `undefined`) are “falsy” when converted to boolean, unlike C# where only `false` is false.
 
-## Arrays (Lists)
+### Arrays (Lists)
 
 * **Definition:** An ordered collection of elements of the same type (in C#) or any type (in JS).
 
@@ -61,7 +59,7 @@ These rules influence how data flows in web applications. For example, HTML form
 
 * **Usage:** Arrays/lists are ubiquitous. In a web app, you might receive a JSON array from an API (parsed into a C# array or list on the server, or a JavaScript array on the client). In React state, arrays are often used for lists of items – but mutating state directly is avoided, so one often creates a new array (`[...oldArray, newItem]`) to maintain immutability rules. Remember: because both languages use references for arrays, be careful when copying arrays. In C#, `myArray.Clone()` or LINQ `ToList()` can create a new array/list copy. In JS, use methods like `slice()` or spread syntax to copy before mutating.
 
-## Objects (Key-Value Containers)
+### Objects (Key-Value Containers)
 
 * **Definition:** A collection of named values (properties) or an instance of a custom type.
 
@@ -71,7 +69,7 @@ These rules influence how data flows in web applications. For example, HTML form
 
 * **Usage:** Web APIs often exchange JSON objects. In C#, a JSON object is usually deserialized into an instance of a class or a dictionary. In JavaScript, you work with JSON directly as objects. For component state (like React state), you often store objects for things like form data (e.g. `{username: "...", password: "..."}`) but avoid mutating them directly (you might merge or spread them to create new ones). Understanding that both C# class instances and JS objects are passed by reference means you watch out for unintended shared mutations. For instance, don’t unintentionally keep an old reference to a state object before setting a new state.
 
-## Classes
+### Classes
 
 * **Definition:** A blueprint for creating objects (with fields/properties and methods).
 
@@ -100,7 +98,7 @@ These rules influence how data flows in web applications. For example, HTML form
 
 * **Usage:** On the backend (ASP.NET), classes represent data models (e.g. User, Product). On the frontend, classes can be used (in frameworks or libraries) but often simple objects or hooks are used. In full-stack work, you might convert a JS object into a C# class instance when sending data to the server. Remember: JavaScript’s classes do not enforce types at runtime, and they too are reference-based just like C# classes.
 
-## Structs (C#) vs (none in JS)
+### Structs (C#) vs (none in JS)
 
 * **Definition (C#):** A `struct` in C# is a lightweight value type. You define it with `struct` keyword:
 
@@ -116,7 +114,7 @@ These rules influence how data flows in web applications. For example, HTML form
 
 * **Usage:** In web forms or APIs, you rarely deal with C# structs directly except built-in ones like `DateTime` or small helpers like `Guid`. But it's good to know that structs are **copied on assignment** and stored by value, unlike classes.
 
-## Tuples
+### Tuples
 
 * **Definition (C#):** A tuple groups a fixed number of values without naming a custom class. C#’s modern tuples use `System.ValueTuple`, e.g. `(int, string)`. For example: `var t = (Id: 1, Name: "Alice");` creates a value-type tuple. ValueTuples are **value types**: copying a tuple copies all its elements. Older `System.Tuple<T1,T2>` (used before C# 7) are reference types (immutable), but entry-level C# now uses the value tuple.
 
@@ -124,7 +122,7 @@ These rules influence how data flows in web applications. For example, HTML form
 
 * **Usage:** Tuples are handy for quick returns from methods (e.g. `return (success, message)` from a function) or grouping related values in C#. In JS you’d do the same with an array or object. Since C# tuples are value types, treating them as small, atomic pieces of data is fine. In web development, tuples might come up less often than classes/objects, but you might encounter them in utility methods or LINQ queries.
 
-## Summary Table of Types
+### Summary Table of Types
 
 | Data Type      | C# Behavior                                                                                                                                                                                                                  | JavaScript Behavior                                                                                                                                                                           |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -139,7 +137,7 @@ These rules influence how data flows in web applications. For example, HTML form
 
 (*Citations:* C# docs and MDN; for example, C# strings are references but immutable, while JS primitives are immutable. JS objects are mutable reference types.\*)
 
-## Advanced Topics (Beyond Entry-Level)
+### Advanced Topics (Beyond Entry-Level)
 
 This overview focuses on basic behavior. Some deeper concepts are not covered here but are important in advanced scenarios:
 
@@ -151,3 +149,172 @@ This overview focuses on basic behavior. Some deeper concepts are not covered he
 * **Concurrency and Threads:** How data is shared between threads (in C#) or between async callbacks (in JS) involves deeper knowledge of memory models and is also advanced.
 
 These concepts are crucial when optimizing a large-scale system or working close to the runtime. However, for an entry-level full-stack role, focus on the basic type behaviors above. Knowing how data is passed and mutated will serve well in handling form data, JSON APIs, and component state in both C# and JavaScript.
+
+## Question 2
+
+In javascript, there were setTimeout & setInterval. I need a refresh on what they were & more importantly, what are the C# equivalents for these. Is Thread.Sleep() similar?
+
+## Answer 2 - JS setTimeout() and setInterval() in C# equivalents?
+
+### **Explaining setTimeout and setInterval in JS**
+
+To answer the user’s question, I'll start by explaining what setTimeout and setInterval do in JavaScript: setTimeout schedules a one-time callback after a delay, while setInterval schedules repeated callbacks at an interval. The C# equivalents for these would be System.Threading.Timer and System.Timers.Timer (for intervals), and Task.Delay (for setTimeout-like behavior). I’ll also explain that Thread.Sleep is different—it’s blocking, meaning it halts execution, unlike the other methods. I’ll include code examples for both JavaScript and C#.
+
+### **JavaScript refresher**
+
+* `setTimeout(fn, delay)`
+  Schedules **one** call to `fn` after `delay` milliseconds.
+
+  ```js
+  // after 1 second, prints "Hi!"
+  setTimeout(() => console.log("Hi!"), 1000);
+  ```
+
+* `setInterval(fn, interval)`
+  Calls `fn` **repeatedly** every `interval` milliseconds until cancelled.
+
+  ```js
+  // prints "Tick" every 2 seconds
+  const id = setInterval(() => console.log("Tick"), 2000);
+  // later: clearInterval(id) to stop
+  ```
+
+---
+
+### C# equivalents
+
+C# has several ways to schedule work after a delay or on a repeating timer. The most common are:
+
+| Behavior           | JavaScript         | C# (async)                               | C# (timer class)                                                              |
+| ------------------ | ------------------ | ---------------------------------------- | ----------------------------------------------------------------------------- |
+| **One-time delay** | `setTimeout(...)`  | `await Task.Delay(ms); …`                | `new Timer(callback, null, dueTime: ms, period: Timeout.Infinite)`            |
+| **Recurring task** | `setInterval(...)` | `while(true){ await Task.Delay(ms); … }` | `new Timer(callback, null, dueTime: ms, period: ms)` or `System.Timers.Timer` |
+
+---
+
+#### 1. One-time delay
+
+##### Async/await style (modern and non-blocking)
+
+```csharp
+async Task SayHiAfterDelayAsync()
+{
+    // non-blocking wait
+    await Task.Delay(1000);
+    Console.WriteLine("Hi!");
+}
+```
+
+* **Pros:** Doesn’t block a thread. Easy to compose with other async code.
+* **Cons:** Requires an async context.
+
+##### Using `System.Threading.Timer`
+
+```csharp
+using System;
+using System.Threading;
+
+class Program
+{
+    static void Main()
+    {
+        // callback, state, dueTime, period
+        var timer = new Timer(_ => {
+            Console.WriteLine("Hi!");
+            timer.Dispose();  // clean up after one fire
+        }, 
+        state: null, 
+        dueTime: 1000, 
+        period: Timeout.Infinite);
+        
+        Console.ReadLine();  // keep the app alive
+    }
+}
+```
+
+* **Pros:** Works in console apps without async/await.
+* **Cons:** More boilerplate; callback runs on a ThreadPool thread.
+
+---
+
+#### 2. Recurring task
+
+##### Async loop
+
+```csharp
+async Task TickAsync()
+{
+    while (true)
+    {
+        await Task.Delay(2000);
+        Console.WriteLine("Tick");
+    }
+}
+```
+
+* **Pros:** Very readable, non-blocking.
+* **Cons:** Requires cancellation logic if you need to stop the loop.
+
+##### `System.Timers.Timer`
+
+```csharp
+using System;
+using System.Timers;
+
+class Program
+{
+    static void Main()
+    {
+        var timer = new Timer(2000);  // interval in ms
+        timer.Elapsed += (s, e) => Console.WriteLine("Tick");
+        timer.AutoReset = true;       // keep repeating
+        timer.Start();
+
+        Console.ReadLine();  // press ENTER to exit
+        timer.Stop();
+        timer.Dispose();
+    }
+}
+```
+
+* **Pros:** Built-in start/stop, thread-safe events, can set `AutoReset`.
+* **Cons:** Event handler runs on a ThreadPool thread by default.
+
+---
+
+#### Why **not** `Thread.Sleep(...)`?
+
+```csharp
+Thread.Sleep(1000);
+Console.WriteLine("Hi!");
+```
+
+* **Blocks** the current thread for that duration.
+* Not scheduling: it simply *pauses* whatever you’re doing, so nothing else on that thread runs.
+* Rarely used in web apps or UI code (it would freeze the request-handling thread or UI thread).
+
+---
+
+### When to use which in web development
+
+* **ASP.NET / ASP.NET Core**
+
+  * Use `Task.Delay` inside async controller actions or background services to avoid blocking threads in the thread pool.
+  * For scheduled background work, use **`IHostedService`** with `PeriodicTimer` (.NET 6+) or a third-party scheduler (Hangfire, Quartz.NET).
+
+* **Desktop/UI apps (WinForms, WPF)**
+
+  * Use `System.Timers.Timer` or `DispatcherTimer` (for WPF) so callbacks marshal back to the UI thread.
+
+* **Console apps / scripts**
+
+  * `Task.Delay` + `async Main` (C# 7.1+) is often simplest.
+  * Timers if you need start/stop control without an async context.
+
+---
+
+**In a nutshell:**
+
+* **`setTimeout` → `Task.Delay` (async) or one-off `Timer`**
+* **`setInterval` → `while/await Task.Delay(...)` (async) or recurring `Timer`**
+* **`Thread.Sleep` ≠ scheduling** (it just blocks the thread; use sparingly)
