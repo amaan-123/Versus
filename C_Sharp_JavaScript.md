@@ -42,6 +42,36 @@ These rules influence how data flows in web applications. For example, HTML form
 
 * **Usage:** Numeric fields appear in forms (age, price, quantity). In C# APIs, JSON numbers map to numeric types in models. In React state, numbers are stored like other primitives. Remember that C# integers vs floats behave differently (e.g. division by two: `5/2` gives 2 in `int` type, but 2.5 in `double`), while JS `5/2` always gives 2.5. Large-scale numeric data (financial, scientific) may need `decimal` in C# or libraries in JS.
 
+---
+
+### 📘 C# vs JavaScript — Numeric Data Types (Full Comparison)
+
+| **Data Type**   | **C# Type / Keyword**        | **JavaScript Equivalent**       | **Memory Size (Bytes)** | **Range (Easy Recall)** | **Range (Exact)**                                       | **Literal Suffix / Usage** | **Notes**                                              |
+| --------------- | ---------------------------- | ------------------------------- | ----------------------- | ----------------------- | ------------------------------------------------------- | -------------------------- | ------------------------------------------------------ |
+| **Byte**        | `byte` (`System.Byte`)       | *None*                          | 1                       | 0 → 255                 | 0 → 255                                                 | *none*                     | Unsigned 8-bit integer                                 |
+| **Short**       | `short` (`System.Int16`)     | *None*                          | 2                       | ~ −32k → +32k           | −32,768 → +32,767                                       | *none*                     | Signed 16-bit integer                                  |
+| **Int**         | `int` (`System.Int32`)       | `Number`                        | 4                       | ~ −2B → +2B             | −2,147,483,648 → +2,147,483,647                         | *none*                     | Default integer type                                   |
+| **Long**        | `long` (`System.Int64`)      | `BigInt`                        | 8                       | ~ ±9 quintillion        | −9,223,372,036,854,775,808 → +9,223,372,036,854,775,807 | `L` or `l`                 | For large integers. Example: `123L`                    |
+| **Float**       | `float` (`System.Single`)    | `Number`                        | 4                       | ~ ±3.4 × 10³⁸           | ±1.175494351 × 10⁻³⁸ → ±3.402823466 × 10³⁸              | `F` or `f`                 | Use `3.14F`; 7-digit precision                         |
+| **Double**      | `double` (`System.Double`)   | `Number`                        | 8                       | ~ ±1.7 × 10³⁰⁸          | ±4.94 × 10⁻³²⁴ → ±1.7976931348623157 × 10³⁰⁸            | `D` or `d` *(optional)*    | Default for floating-point. 15–16 digit precision      |
+| **Decimal**     | `decimal` (`System.Decimal`) | *Use library (e.g. decimal.js)* | 16                      | ~ ±7.9 × 10²⁸           | ±1.0 × 10⁻²⁸ → ±7.9228162514264337593543950335 × 10²⁸   | `M` or `m`                 | For precise financial/scientific calculations          |
+| **Number (JS)** | —                            | `Number`                        | 8                       | ~ ±1.7 × 10³⁰⁸          | ±5e−324 → ±1.7976931348623157e+308                      | *none*                     | 64-bit IEEE 754 double; integers safe only up to 2⁵³−1 |
+| **BigInt (JS)** | —                            | `BigInt`                        | variable                | ~ ±9 quintillion+       | Arbitrary precision                                     | `n` (e.g. `123n`)          | For very large integers; no fractional part            |
+
+---
+
+### ⚙️ Summary for Quick Recall
+
+| **Purpose**            | **C# Recommended** | **JS Option**                    |
+| ---------------------- | ------------------ | -------------------------------- |
+| Small whole numbers    | `int`              | `Number`                         |
+| Very large integers    | `long`             | `BigInt`                         |
+| Decimal (exact) values | `decimal`          | Library (`decimal.js`, `Big.js`) |
+| Floating-point math    | `float`, `double`  | `Number`                         |
+| Integer division       | `int` (truncates)  | `Number` (auto float)            |
+
+---
+
 ### Booleans
 
 * **Definition:** Truth values `true` or `false`.
@@ -128,7 +158,7 @@ These rules influence how data flows in web applications. For example, HTML form
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **String**     | *Reference type* (`System.String`), immutable. Stored on heap. Assigning copies reference, but since strings can’t change in place, `a = a + b` makes a new string. Good for textual data (form inputs, JSON).               | *Primitive* (immutable). Stored as value. Concatenation (`+`) creates new string. Used everywhere for text.                                                                                   |
 | **Number**     | *Value types* (`int`, `double`, etc). Stored by value (usually stack). Assigning copies the number. Strong typing; different types (`int`, `double`, `decimal`) and no automatic mix. Good for counters, math (forms, data). | *Primitive* (`Number`, or `BigInt`). Stored as value. Assigning copies the value. Only one Number type (IEEE float). JS auto-coerces types (e.g. adding string and number concatenates).      |
-| **Boolean**    | *Value type* (`bool`). Stored by value. Copies on assignment. Used for flags, conditions.                                                                                                                                    | *Primitive* (`boolean`). Stored as value. Copies on assignment. Used for flags, conditions (`true`/`false`). JS also has truthy/falsy values beyond boolean.                                  |
+| **Boolean**    | *Value type* (`bool`). Stored by value. Copies on assignment. Used for flags, conditions.                                                                                                                                    | *Primitive* (`boolean`). Stored as value. Copies on assignment. Used for flags, conditions (`true`/`false`). JS also has truthy/falsy values beyond boolean like empty string `""`, number `0`, `null`, `undefined`.                                  |
 | **Array/List** | *Reference type* (arrays or `List<T>`). Array type `T[]` is reference. Stored on heap. Assigning copies reference. Elements mutable. Length fixed (for arrays). Common for item collections (JSON lists, state lists).       | *Reference type* (`Array` object). Stored on heap. Assigning copies reference. Elements mutable. Dynamic size. Used for lists from APIs, React state arrays, etc.                             |
 | **Object**     | *Reference type* (class instance or `object`). Stored on heap. Assigning copies reference. Properties mutable (unless designed readonly). Used for complex data models (JSON mapping). Example: `var u = new User();`        | *Reference type* (`Object` literal). Stored on heap. Assigning copies reference. Properties mutable. Used for JSON data, state objects, plain data containers.                                |
 | **Class**      | *Reference type*. Instances live on heap. Copying a class variable copies reference. Supports methods and inheritance. Used for backend models, services, etc.                                                               | *Reference type*. ES6 `class` is syntax sugar; instances are objects on heap. Assigning copies reference. Used for object templates (e.g. components, models). Functions also create objects. |
