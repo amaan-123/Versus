@@ -2,6 +2,55 @@
 
 [Roadmap for JavaScript and TypeScript developers learning C#](https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/tips-for-javascript-developers)
 
+**JavaScript** - A generally single-threaded(event loop), interpreted, dynamically typed language used for web interactivity and backend (via Node.js). It runs in browsers and on servers, following the ECMAScript standard.
+
+**C#** – C# is a **compiled, statically typed** language that runs on the .NET runtime. The C# compiler translates source code to an intermediate language (IL); at execution time the .NET runtime **just‑in‑time (JIT) compiles** that IL to native machine code (or uses ahead‑of‑time compilation). It is used for desktop, web, mobile, cloud, and game development, and follows the C# language specification. Not inherently single‑threaded; it supports multithreading via `Thread`, `Task`, async/await, etc.  
+
+Here’s a **clean, comparative historical timeline** of **JavaScript (ECMAScript)** vs **C# (.NET)** — showing major **language + platform evolution milestones** and **important features introduced**.
+
+---
+
+## 📜 JavaScript (ECMAScript) vs C# (.NET) — Evolution Timeline
+
+| **Year**            | **JavaScript / ECMAScript** | **Key JS Features Introduced**                                                                             | **C# / .NET Version**           | **Key C# / .NET Features Introduced**                                                |                    |                                                            |
+| ------------------- | --------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------ | ------------------ | ---------------------------------------------------------- |
+| **1995**            | JavaScript (Netscape)       | Created by Brendan Eich; basic syntax, functions, objects                                                  | —                               | —                                                                                    |                    |                                                            |
+| **1997**            | ECMAScript 1 (ES1)          | Standardized JS syntax & basic language structure                                                          | —                               | —                                                                                    |                    |                                                            |
+| **1999**            | ECMAScript 3 (ES3)          | Regular expressions, try/catch, `do-while`, string methods                                                 | —                               | —                                                                                    |                    |                                                            |
+| **2000**            | —                           | —                                                                                                          | **C# 1.0** (.NET Framework 1.0) | Base language features, classes, structs, interfaces, properties, events             |                    |                                                            |
+| **2002–2003**       | —                           | —                                                                                                          | **C# 1.2 / .NET 1.1**           | `foreach`, `finally`, delegates, small improvements                                  |                    |                                                            |
+| **2005**            | —                           | —                                                                                                          | **C# 2.0 / .NET 2.0**           | Generics, nullable types, iterators (`yield`), anonymous methods                     |                    |                                                            |
+| **2006–2008**       | —                           | —                                                                                                          | **C# 3.0 / .NET 3.5**           | LINQ, lambda expressions, extension methods, auto-properties, `var` (type inference) |                    |                                                            |
+| **2009**            | ECMAScript 5 (ES5)**Draft** | `Object.create()`, strict mode, JSON, `Array.forEach`, getters/setters                                     | —                               | —                                                                                    |                    |                                                            |
+| **2010**            | —                           | —                                                                                                          | **C# 4.0 / .NET 4.0**           | Dynamic typing (`dynamic`), named and optional parameters                            |                    |                                                            |
+| **2011**            | ECMAScript 5.1              | Standardized JSON, refined strict mode                                                                     | —                               | —                                                                                    |                    |                                                            |
+| **2012**            | —                           | —                                                                                                          | **C# 5.0 / .NET 4.5**           | `async` / `await` for async programming                                              |                    |                                                            |
+| **2015**            | **ECMAScript 6 (ES2015)**   | `let`, `const`, arrow functions, classes, template literals, modules, promises, destructuring, `Map`/`Set` | —                               | —                                                                                    |                    |                                                            |
+| **2017**            | **ES2017**                  | `async/await`, `Object.entries()`, shared memory                                                           | **C# 7.0 / .NET Core 1.x**      | Tuples, local functions, pattern matching (initial), out variables                   |                    |                                                            |
+| **2018**            | **ES2018**                  | Rest/spread for objects, async iterators, `Promise.finally()`                                              | **C# 7.3**                      | Ref locals/returns, performance features                                             |                    |                                                            |
+| **2019**            | **ES2019**                  | `flat()`, `flatMap()`, optional catch binding                                                              | **C# 8.0 / .NET Core 3.0**      | Nullable reference types, async streams, `using` declarations, ranges (`..`)         |                    |                                                            |
+| **2020**            | **ES2020**                  | Optional chaining (`?.`), nullish coalescing (`??`), `BigInt`, dynamic import                              | **C# 9.0 / .NET 5.0**           | Records, init-only setters, top-level statements, improved pattern matching          |                    |                                                            |
+| **2021**            | **ES2021**                  | Logical assignment (`&&=`, `                                                                               |                                 | =`),`String.replaceAll()`, WeakRefs                                                 | **C# 10 / .NET 6** | File-scoped namespaces, global usings, lambda improvements |
+| **2022**            | **ES2022**                  | Class fields, private methods (`#`), top-level `await`                                                     | **C# 11 / .NET 7**              | List patterns, required members, generic math                                        |                    |                                                            |
+| **2023–2024**       | **ES2023 / ES2024**         | Array `findLast`, `findLastIndex`, `Symbol.metadata`, JSON modules                                         | **C# 12 / .NET 8**              | Primary constructors for classes, collection expressions, interceptors               |                    |                                                            |
+| **2025 (expected)** | **ES2025 draft**            | Temporal API (date/time), decorators finalized                                                             | **C# 13 / .NET 9 (preview)**    | Params spread, partial properties, interceptors expansion                            |                    |                                                            |
+
+---
+
+### ⚙️ Comparison Summary
+
+| **Aspect**                | **JavaScript (ECMAScript)**    | **C# (.NET)**                                               |
+| ------------------------- | ------------------------------ | ----------------------------------------------------------- |
+| **Origin**                | 1995, web scripting (Netscape) | 2000, Microsoft enterprise platform                         |
+| **Standard Body**         | ECMA International (TC39)      | Microsoft (.NET team)                                       |
+| **Execution Environment** | Browsers, Node.js, Deno        | .NET CLR (Windows, Linux, macOS)                            |
+| **Typing**                | Dynamic                        | Static (with type inference)                                |
+| **Async Model**           | Promises → async/await         | Tasks → async/await                                         |
+| **Evolution Pace**        | Annual (ES20xx releases)       | Tied to .NET major releases (~1–2 yrs)                      |
+| **Main Milestones**       | ES6 (modern JS foundation)     | C# 3.0 (LINQ + lambdas), C# 5 (async/await), C# 9 (records) |
+
+---
+
 ## Question 1: C# and JavaScript Data Types
 
 There are value & reference data types in C#.
@@ -348,3 +397,90 @@ Console.WriteLine("Hi!");
 * **`setTimeout` → `Task.Delay` (async) or one-off `Timer`**
 * **`setInterval` → `while/await Task.Delay(...)` (async) or recurring `Timer`**
 * **`Thread.Sleep` ≠ scheduling** (it just blocks the thread; use sparingly)
+
+## Question 3: How does the Sort() method compare in C# & Javascript?
+
+## Answer 3: Sort() behaviour - `Javascript` vs `C#`
+
+| **Language**   | **Default Sort Behavior**      | **Numeric Sort**        | **Custom Comparator Syntax**                        |
+| -------------- | ------------------------------ | ----------------------- | --------------------------------------------------- |
+| **JavaScript** | Lexicographic (as **strings**) | Must provide comparator | `array.sort((a,b) => a - b)`                        |
+| **C#**         | Numeric (based on **type**)    | Default                 | `list.Sort()` or `list.Sort((a,b)=>a.CompareTo(b))` |
+
+---
+
+### 🔹 Explanation
+
+#### **JavaScript**
+
+* `.sort()` converts elements to **strings** by default and compares them **lexicographically** (dictionary order).
+* `'10' < '2'` because `'1'` comes before `'2'` → hence `[10, 2, 1]` → `[1, 10, 2]`.
+`Array.prototype.sort` expects a *compare function* that returns a number:
+
+* **Negative** → `a` should come **before** `b`  
+* **Zero** → `a` and `b` are considered equal for ordering  
+* **Positive** → `a` should come **after** `b`
+
+```js
+nums.sort((a, b) => a - b);
+```
+
+* `a - b` is negative when `a < b`, zero when equal, positive when `a > b`.  
+* Therefore the array is ordered from **smallest to largest** (numeric ascending).
+
+```js
+nums.sort((a, b) => b - a);
+```
+
+* `b - a` flips the sign: it’s negative when `b < a` (i.e., when `a > b`).  
+* This makes larger numbers sort **before** smaller ones, yielding a **numeric descending** order.
+
+So the two calls produce:
+
+* `a - b` → `[1, 2, 10]` (ascending)  
+* `b - a` → `[10, 2, 1]` (descending)  
+
+Example:
+
+```javascript
+let nums = [10, 2, 1];
+nums.sort();            // ["1", "10", "2"] → [1, 10, 2]
+nums.sort((a, b) => a - b); // numeric ascending → [1, 2, 10]
+nums.sort((a, b) => b - a); // numeric descending → [10, 2, 1]
+```
+
+---
+
+#### **C#**
+
+* `.Sort()` works **numerically** or **alphabetically** depending on the data type.
+* For numeric collections (`List<int>`, `List<double>`, etc.), it compares **by value**.
+* For string collections, it compares **lexicographically** (culture/ordinal dependent).
+
+Example:
+
+```csharp
+List<int> nums = new List<int> {10, 2, 1};
+nums.Sort();           // [1, 2, 10] — numeric sort by default
+
+List<string> words = new List<string> {"10", "2", "1"};
+words.Sort();          // ["1", "10", "2"] — string comparison
+```
+
+---
+
+### 🔸 Summary Points
+
+| **Aspect**                 | **JavaScript**                        | **C#**                                          |
+| -------------------------- | ------------------------------------- | ----------------------------------------------- |
+| Default `.sort()` behavior | String-based comparison               | Type-based comparison                           |
+| Numeric sort by default?   | ❌ No                                  | ✅ Yes                                           |
+| Sort order control         | Comparator function `(a,b)=>...`      | Overload with `Comparison<T>` or `IComparer<T>` |
+| Mixed types allowed?       | Yes, but risky (converted to strings) | No, unless `object` or custom comparer used     |
+
+---
+
+So:
+
+* JS `sort()` is **lexical unless told otherwise**.
+* C# `Sort()` is **numeric if numbers, lexical if strings**, decided by type system.
